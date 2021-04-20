@@ -8,6 +8,9 @@
     - Express
     - React Typescript
     - Node
+    - GraphQL
+    - Apollo Server
+    - TypeORM
 
 ## Features
 
@@ -17,4 +20,3 @@
     - [ ] Set a monthly or weekly budget
     - [ ] Shared budgets with other users(i.e family, roommates, etc)
     - [ ] View investiments and track stocks
-
