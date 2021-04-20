@@ -1,0 +1,22 @@
+@import "./colorPalette.css";
+
+* {
+  padding: 0;
+  margin: 0;
+  font-family: Roboto;
+}
+
+.app {
+  width: 100vw;
+  height: 100vh;
+}
+
+.backgroundShape {
+  position: absolute;
+  right: 0;
+  width: 70vw;
+  height: 70vw;
+  z-index: -1;
+  background: linear-gradient(var(--primary) 1%, var(--logo) 95%);
+  clip-path: circle(50% at 100% 0);
+}

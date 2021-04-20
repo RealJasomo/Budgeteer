@@ -1,10 +1,15 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import { Homepage } from './components'
+import { Homepage, Nav } from './components'
+
+import styles from './css/index.module.css';
+
 function App() {
   return (
-    <>
+    <div className={styles.app}>
+    <div className={styles.backgroundShape}></div>
     <Router>
+      <Nav/>
       <Switch>
         <Route exact path="/">
           <Homepage />
@@ -14,7 +19,7 @@ function App() {
         </Route>
       </Switch>
     </Router>
-    </>
+    </div>
   );
 }
 
