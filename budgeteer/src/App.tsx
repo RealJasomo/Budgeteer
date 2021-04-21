@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import { Homepage, Nav } from './components'
+import { Homepage, Nav } from './components';
+
 
 import styles from './css/index.module.css';
 
@@ -24,5 +25,6 @@ function App() {
     </div>
   );
 }
+
 
 export default App;

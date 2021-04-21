@@ -45,7 +45,7 @@ function Nav() {
             <div ref={div} className={`${styles.nav} ${styles.navLinks}`} style={(!menuOpen&&!largeWidth)?{display: "none"}:{display: "flex"}}>
             <Link to="/about" className={styles.navLink}> How it works</Link>
             <Link to="/faq" className={`${styles.navLink} ${styles.navBreak}`}>FAQ</Link>
-            {user.loaded&&user.user ?
+            {user.state.loaded&&user.state.user ?
                     <>
                         <button type="button" className={styles.logout}>Logout</button>
                     </>
