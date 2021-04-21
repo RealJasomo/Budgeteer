@@ -13,9 +13,11 @@
 
 .backgroundShape {
   position: absolute;
+  top: 0;
   right: 0;
-  width: 70vw;
-  height: 70vw;
+  width: 60vw;
+  height: 60vw;
+  max-height: 80vh;
   z-index: -1;
   background: linear-gradient(var(--primary) 1%, var(--logo) 95%);
   clip-path: circle(50% at 100% 0);

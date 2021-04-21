@@ -1,0 +1,48 @@
+.homepage {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+#info {
+  margin: 1rem 2rem;
+  width: 50vw;
+}
+
+#info h1 {
+  font-size: 5rem;
+  width: 10ch;
+}
+
+#info p {
+  margin-top: 1rem;
+  color: #4c4c4c;
+  width: 50ch;
+}
+
+#preview img {
+  transform: translateY(25%);
+}
+
+@media only screen and (max-width: 992px) {
+  .homepage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #info * {
+    margin: 1rem 0;
+    transform: translateX(-25%);
+  }
+}
+@media only screen and (max-width: 768px) {
+  #info h1 {
+    font-size: 4rem;
+  }
+
+  #info p {
+    width: 30ch;
+  }
+  #info * {
+    margin-left: 1rem;
+  }
+}

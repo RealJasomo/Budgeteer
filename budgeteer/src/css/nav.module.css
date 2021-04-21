@@ -71,15 +71,14 @@ button:focus {
 
 .menuIcon {
   display: none;
+  font-size: 2rem;
   justify-self: flex-end;
   align-self: center;
-  font-size: 2rem;
-  float: right;
   color: white;
 }
 
-.menuContainer {
-  display: flex;
+.black {
+  color: black;
 }
 
 @media only screen and (max-width: 768px) {
@@ -88,9 +87,41 @@ button:focus {
   }
 
   .logoHeader {
+    display: inline-flex;
     flex-grow: 1;
   }
+
+  .menuContainer {
+    display: inline-flex;
+    width: 100vw;
+  }
+
+  .register {
+    color: #101010;
+    font-weight: 400;
+  }
+
   .menuIcon {
-    display: block;
+    display: inline;
+    z-index: 2;
+    margin-right: 2rem;
+  }
+
+  .login {
+    color: #d8d8d8;
+    background-color: var(--primary);
+  }
+
+  .navLinks {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: -25px;
+    background: white;
+    border-radius: 25px 0 25px 25px;
+    box-shadow: -10px 10px 7px rgba(0, 0, 0, 0.2);
+    width: 50vw;
+    height: 30vh;
+    padding: 1rem;
   }
 }
