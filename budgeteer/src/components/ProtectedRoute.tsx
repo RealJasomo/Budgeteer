@@ -10,13 +10,10 @@ interface ProtectedRouteProps{
 
 export default function ProtectedRoute({to, path, children}: ProtectedRouteProps) {
     const auth = useContext(AuthContext);
-    if(auth.state.loaded){
-        if(auth.state.user){
-            return (<Route path={path}>{children}</Route>);
-        }else{
-            return (<Redirect to={to}></Redirect>);
-        }
-    }else{
-        return null;
+    if(auth.state.user){
+        return (<Route path={path}>{children}</Route>);
+    }
+    else{
+        return (<Redirect to={to}></Redirect>);
     }
 }

@@ -38,12 +38,14 @@
   text-decoration: none;
 }
 
-.login {
+.login,
+.logout {
   background-color: var(--logo);
   padding: 0.25rem 1rem;
   border: none;
   border-radius: 25px;
   font-weight: 500;
+  text-decoration: none;
 }
 
 .login:hover {
@@ -53,6 +55,7 @@
 .register {
   color: white;
   background: none;
+  text-decoration: none;
   border: none;
   font-weight: 300;
 }

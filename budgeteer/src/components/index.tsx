@@ -1,3 +1,5 @@
 export {default as Homepage} from './Homepage'
 export {default as ProtectedRoute} from './ProtectedRoute' 
 export {default as Nav} from './Nav'
+export {default as SignUp} from './Signup'
+export {default as Login} from './Login'

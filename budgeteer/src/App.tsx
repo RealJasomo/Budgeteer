@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import { Homepage, Nav } from './components';
+import { Homepage, Nav, SignUp, Login } from './components';
 
 
 import styles from './css/index.module.css';
@@ -11,13 +11,19 @@ function App() {
     <Router>
       <Nav/>
       <Switch>
-        <Route path={["/", "/about"]}>
+        <Route path={["/", "/about", "/signup", "/login"]} exact>
           <div className={styles.backgroundShape}></div>
         <Route exact path="/">
           <Homepage />
         </Route>
         <Route path="/about">
             about
+        </Route>
+        <Route path="/signup">
+            <SignUp/>
+        </Route>
+        <Route path="/login">
+            <Login/>
         </Route>
         </Route>
       </Switch>

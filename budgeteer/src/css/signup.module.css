@@ -1,0 +1,42 @@
+@import "./colorPalette.css";
+
+.header {
+  margin: 1rem 2rem;
+}
+
+.mform {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 70vw;
+  height: 60vh;
+  border-radius: 25px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  background-color: white;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.button {
+  padding: 0.25rem;
+  width: 10ch;
+  margin-top: 1rem;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.next {
+  background-color: var(--secondary);
+}
+
+.submit {
+  color: white;
+  background-color: var(--primary);
+}

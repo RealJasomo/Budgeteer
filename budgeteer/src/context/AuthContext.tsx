@@ -1,27 +1,28 @@
 import React, { createContext,  useReducer } from 'react';
+import * as cookie from 'js-cookie';
 
 interface AuthState{
-    user: Object | null,
-    loaded: boolean
+    user: string | null
 }
 
 interface AuthAction{
     type: "login" | "logout",
-    payload: Object | null
+    payload: string | null
 }
 interface Auth{
     state: AuthState, 
     dispatch: React.Dispatch<any>
 }
 
-const initialState: AuthState = {user: null, loaded: false}
+const initialState: AuthState = { user: cookie.get("token") || null}
 
 const reducer = (state: AuthState, action: AuthAction): AuthState => {
     if(action.type === "login"){
-        return {...state, user: action.payload as AuthState};
+        return {user: action.payload};
     }
     if (action.type === "logout"){
-        return {... state, user: null};
+        cookie.remove("token");
+        return { user: null };
     }
     return state;
 }

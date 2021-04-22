@@ -7,7 +7,8 @@ import { AuthProvider } from './context/AuthContext';
 
  const client = new ApolloClient({
   cache: new InMemoryCache(),
-  uri: process.env.REACT_APP_GRAPHQL
+  uri: process.env.REACT_APP_GRAPHQL,
+  credentials: 'include'
 });
 
 ReactDOM.render(

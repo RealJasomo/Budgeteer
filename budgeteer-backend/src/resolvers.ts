@@ -9,6 +9,10 @@ import { User } from "./entity/User";
 
 dotenv.config();
 
+const setTokens = (res: any, userId: string) =>{
+    const token = jwt.sign({ userId: userId }, process.env.TOKEN_SECRET as string);
+    res.cookie("token", token);
+}
 export const resolvers: IResolvers = {
     Query: {
         currentUser: (_, __, { req }) => {
@@ -16,7 +20,7 @@ export const resolvers: IResolvers = {
         }
     },
     Mutation: {
-        register: async (_, {email, password}) => {
+        register: async (_, {email, password}, { res }) => {
             var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
             var isPasswordStrong = strongRegex.test(password);
             var isEmail = EmailValidator.validate(email);
@@ -32,20 +36,21 @@ export const resolvers: IResolvers = {
                 email,
                 password: hashedPassword
             }).save();
-            return false;
+            setTokens(res, user._id);
+            return true;
         },
-        login: async (_, {email, password}, { res }) => {
+        login: async (_, {email, password}, { req, res }) => {
             const user: User | undefined = await User.findOne({ email });
             if(user){
                 const valid: boolean = await bcrypt.compare(password, user.password);
                 if(!valid){
                     return null;
                 }
-                const token = jwt.sign({ userId: user.id }, process.env.TOKEN_SECRET as string);
-                res.cookie("token", token);
+                setTokens(res, user._id);
                 return user;
             }
             return null;
         }
     }
 }
+
