@@ -14,7 +14,7 @@
 
 ## Features
 
-    - [ ] Create an account
+    - [x] Create an account
     - [ ] Track balances on multiple accounts
     - [ ] Graphically view your spending per month
     - [ ] Set a monthly or weekly budget
