@@ -18,8 +18,8 @@ export default function Signup() {
         event.preventDefault();
         switch(page){
             case 0:
-                await applyRegister();
-                if(registerStatus){
+                const result = await applyRegister();
+                if(result){
                     setPage(page+1);
                 }
                 break;

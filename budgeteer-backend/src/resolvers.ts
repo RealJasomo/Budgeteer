@@ -39,7 +39,7 @@ export const resolvers: IResolvers = {
             setTokens(res, user._id);
             return true;
         },
-        login: async (_, {email, password}, { req, res }) => {
+        login: async (_, {email, password}, { res }) => {
             const user: User | undefined = await User.findOne({ email });
             if(user){
                 const valid: boolean = await bcrypt.compare(password, user.password);

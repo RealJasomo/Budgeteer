@@ -8,7 +8,7 @@ const REGISTER = gql`
         register(email: $email, password: $password)
     }
 `
-export default function useRegister(email: string, password: string): [boolean, () => Promise<void>]{
+export default function useRegister(email: string, password: string): [boolean, () => Promise<boolean|void>]{
     const [register] = useMutation(REGISTER);
     const [registered, setRegistered] = useState<boolean>(false);
     
@@ -27,6 +27,7 @@ export default function useRegister(email: string, password: string): [boolean, 
                 payload: cookie.get("token")
             });
             await setRegistered(true);
+            return true;
         }
      }
      return [registered, handleSubmit];
