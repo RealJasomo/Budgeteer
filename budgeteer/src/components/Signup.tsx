@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
-import { useRegister } from '../hooks';
+import React, { useState, useEffect } from 'react'
+import { useCreateProfile, useRegister } from '../hooks';
 
 import styles from '../css/signup.module.css';
+import { Redirect } from 'react-router';
 
 export default function Signup() {
     const [page, setPage] = useState<number>(0);
@@ -13,8 +14,11 @@ export default function Signup() {
 
     //mutation hook
     const [registerStatus, applyRegister] = useRegister(email, password);
+    const [profileStatus, createProfile] = useCreateProfile(name, lastName, birthdate);
+    const [profileResult, setProfileResult] = useState<boolean>(false);
 
-    const handleSubmit = async (event: React.FormEvent) => {
+    
+     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
         switch(page){
             case 0:
@@ -24,6 +28,8 @@ export default function Signup() {
                 }
                 break;
             case 1:
+                const profileResult = await createProfile();
+                setProfileResult(!!profileResult);
                 break;
             default:
                 break;
@@ -50,6 +56,9 @@ export default function Signup() {
             default:
                 break;
         }
+    }
+    if(profileResult || profileStatus){
+        return (<Redirect to="/"/>);
     }
     return (
         <div>

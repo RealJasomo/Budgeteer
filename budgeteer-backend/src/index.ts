@@ -8,6 +8,7 @@ import * as morgan from 'morgan';
 import * as cors from 'cors';
 import * as express from 'express';
 import { authMiddleware } from './middleware/Auth';
+import { connectionMiddleware } from './middleware/Connection';
 
 const startServer = async () => {
     const corsOptions = {
@@ -20,7 +21,7 @@ const startServer = async () => {
         context: ({ req, res}: any) => ({req , res})
     });
 
-    await createConnection();
+    const connection = await createConnection();
 
     const app = express();
     
@@ -29,6 +30,7 @@ const startServer = async () => {
     app.use(morgan("common"));
     app.use(cors(corsOptions));
     app.use(authMiddleware);
+    app.use(connectionMiddleware(connection));
 
     server.applyMiddleware({ app , cors: corsOptions});
 

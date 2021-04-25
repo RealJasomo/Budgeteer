@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ObjectIdColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ObjectIdColumn, OneToOne, JoinColumn, getRepository } from "typeorm";
+import { Profile } from "./Profile";
 
 @Entity("users")
 export class User extends BaseEntity{
@@ -13,5 +14,8 @@ export class User extends BaseEntity{
     
     @Column("text")
     password: string;
+
+    @Column(type=>Profile)
+    profile: Profile;
 
 }

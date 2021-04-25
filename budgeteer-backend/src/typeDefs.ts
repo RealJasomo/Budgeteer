@@ -5,6 +5,15 @@ export const typeDefs = gql`
         _id: String!
         id: ID!
         email: String!
+        profile: Profile
+    }
+
+    type Profile{
+        _id: String!
+        id: ID!
+        firstName: String!
+        lastName: String!
+        dateOfBirth: String!
     }
     
     type Query{
@@ -14,5 +23,6 @@ export const typeDefs = gql`
     type Mutation {
         register(email: String!, password: String!): Boolean!
         login(email: String!, password: String!): User
+        createProfile(userId: String!, firstName: String!, lastName: String!, dateOfBirth: String!): Profile
     }
 `;
