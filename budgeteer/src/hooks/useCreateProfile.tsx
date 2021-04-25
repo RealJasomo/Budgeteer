@@ -1,6 +1,5 @@
-import { useState } from 'react';
 import { gql, useMutation, useQuery } from '@apollo/client';
-import { validate } from 'graphql';
+
 
 const PROFILE = gql`
     mutation CreateProfile($userId: String!, $firstName: String!, $lastName: String!, $dateOfBirth: String!){
@@ -18,13 +17,11 @@ const USER = gql`
     }
 `;
 
-export default function useCreateProfile(firstName: string, lastName: string, dateOfBirth: string):[boolean, () => Promise<any>]{
-    const [createProfile, {error}] = useMutation(PROFILE);
-    const { refetch: getUser, data  }= useQuery(USER, {
+export default function useCreateProfile(firstName: string, lastName: string, dateOfBirth: string):[() => Promise<any>]{
+    const [createProfile] = useMutation(PROFILE);
+    const { refetch: getUser, data , loading }= useQuery(USER, {
         fetchPolicy: "network-only"
     });
-
-    const [created, setCreated] = useState<boolean>(false);
     
     const invalidate = (): boolean =>{
         const invalid_firstName = !firstName || firstName.length < 2;
@@ -34,29 +31,31 @@ export default function useCreateProfile(firstName: string, lastName: string, da
     }
     const handleCreateProfile = async () => {
         await getUser();
+        while(loading);
 
         if(!data.currentUser){
+            console.log("Bad");
             return null;
         }else{
             if(invalidate()){
                 return null;
             }
-        const {data : result, errors} = await createProfile({
-            variables: {
-                userId: data.currentUser["_id"],
-                firstName,
-                lastName,
-                dateOfBirth
-            }
-        });
+            const { errors} = await createProfile({
+                variables: {
+                    userId: data.currentUser["_id"],
+                    firstName,
+                    lastName,
+                    dateOfBirth
+                }
+            });
 
-        if(errors){
-            console.log("error:",errors);
-        }
-        await setCreated(true);
-        return true;
+            if(errors){
+                console.log("error:",errors);
+            }
+
+            return true;
         }
     }
 
-    return [created, handleCreateProfile];
+    return [handleCreateProfile];
 }

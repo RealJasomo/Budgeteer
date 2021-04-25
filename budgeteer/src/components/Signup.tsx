@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useCreateProfile, useRegister } from '../hooks';
 
 import styles from '../css/signup.module.css';
@@ -13,8 +13,8 @@ export default function Signup() {
     const [birthdate, setBirthdate] = useState<string>("");
 
     //mutation hook
-    const [registerStatus, applyRegister] = useRegister(email, password);
-    const [profileStatus, createProfile] = useCreateProfile(name, lastName, birthdate);
+    const [applyRegister] = useRegister(email, password);
+    const [createProfile] = useCreateProfile(name, lastName, birthdate);
     const [profileResult, setProfileResult] = useState<boolean>(false);
 
     
@@ -57,7 +57,7 @@ export default function Signup() {
                 break;
         }
     }
-    if(profileResult || profileStatus){
+    if(profileResult){
         return (<Redirect to="/"/>);
     }
     return (

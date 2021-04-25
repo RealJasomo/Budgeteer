@@ -1,19 +1,24 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
-import { Route, Redirect} from 'react-router-dom';
+import { Route, Redirect, useLocation} from 'react-router-dom';
 
 interface ProtectedRouteProps{
-    to: string,
     path: string,
-    children: React.ReactNode
+    to?: string,
+    element?: React.ReactNode,
+    children: React.ReactNode,
+    exact?: boolean
 }
 
-export default function ProtectedRoute({to, path, children}: ProtectedRouteProps) {
+export default function ProtectedRoute({to, path, element, children, exact=false}: ProtectedRouteProps) {
     const auth = useContext(AuthContext);
+    const location = useLocation();
     if(auth.state.user){
-        return (<Route path={path}>{children}</Route>);
+        return (<Route exact={exact} path={path}>{children}</Route>);
+    }else if(exact && location.pathname !== path){
+        return <></>
     }
     else{
-        return (<Redirect to={to}></Redirect>);
+        return (element||!to?<>{element}</>:<Redirect to={to}></Redirect>);
     }
 }

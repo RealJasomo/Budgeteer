@@ -15,15 +15,19 @@ function Nav() {
         if(window.innerWidth >= 768){
             setLargeWidth(true);
         }
-        //handle resizes
-        window.addEventListener("resize", () => {
+        const handler = () => {
             if(window.innerWidth < 768){
                 setLargeWidth(false);
             }else{
                 setLargeWidth(true);
                 setMenuOpen(false);
             }
-        });
+        };
+        //handle resizes
+        window.addEventListener("resize", handler);
+        return () =>{
+            window.removeEventListener("resize", handler);
+        }
     }, []);
 
     const handleLogout = () =>{

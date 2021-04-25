@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import { gql, useMutation } from '@apollo/client';
 import { AuthContext } from '../context/AuthContext';
 import * as cookie from 'js-cookie';
@@ -8,9 +8,8 @@ const REGISTER = gql`
         register(email: $email, password: $password)
     }
 `
-export default function useRegister(email: string, password: string): [boolean, () => Promise<boolean|void>]{
+export default function useRegister(email: string, password: string): [() => Promise<boolean|void>]{
     const [register] = useMutation(REGISTER);
-    const [registered, setRegistered] = useState<boolean>(false);
     
     const auth = useContext(AuthContext);
     
@@ -26,9 +25,8 @@ export default function useRegister(email: string, password: string): [boolean, 
                 type: "login",
                 payload: cookie.get("token")
             });
-            await setRegistered(true);
             return true;
         }
      }
-     return [registered, handleSubmit];
+     return [handleSubmit];
 }

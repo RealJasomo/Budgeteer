@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import { Homepage, Nav, SignUp, Login } from './components';
+import { Homepage, Nav, SignUp, Login, ProtectedRoute } from './components';
 
 
 import styles from './css/index.module.css';
@@ -13,9 +13,9 @@ function App() {
       <Switch>
         <Route path={["/", "/about", "/signup", "/login"]} exact>
           <div className={styles.backgroundShape}></div>
-        <Route exact path="/">
-          <Homepage />
-        </Route>
+        <ProtectedRoute exact={true} path="/" element={<Homepage/>}>
+
+        </ProtectedRoute>
         <Route path="/about">
             about
         </Route>
